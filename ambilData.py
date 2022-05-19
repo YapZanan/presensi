@@ -75,7 +75,7 @@ class ambilData():
         shutil.move(path_from, path_to)
 
     def simpanEncoding(self, path_to):
-        file =
+        print("aaa")
 
         with open('Encopding\\'+ path_to+'.npy', 'wb') as f:
             np.save(f, image_encoding)
