@@ -149,7 +149,7 @@ if __name__ == '__main__':
     # obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 
     # Load a second sample picture and learn how to recognize it.
-    biden_image = face_recognition.load_image_file("biden.png")
+    biden_image = face_recognition.load_image_file("Belajar/519101_biden.png")
     biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
 
     # Create arrays of known face encodings and their names
