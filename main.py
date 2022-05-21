@@ -1,7 +1,12 @@
+import time
+from statistics import mean
+
+now = time.time()
 import face_recognition
 import numpy as np
 import cv2
 import olahData
+
 
 class jalankan():
     def __init__(self):
@@ -14,12 +19,16 @@ class jalankan():
 
 
     def webcam(self):
+        delay = []
+        se = time.time()
+        print("Time to start", se-now)
         video_capture = cv2.VideoCapture(0, cv2.CAP_DSHOW)
         face_locations = []
         face_encodings = []
         face_names = []
         process_this_frame = True
         while True:
+            sekarang = time.time()
             # Grab a single frame of video
             ret, frame = video_capture.read()
 
@@ -59,21 +68,26 @@ class jalankan():
             # Display the results
             for (top, right, bottom, left), name in zip(face_locations, face_names):
                 # Scale back up face locations since the frame we detected in was scaled to 1/4 size
-                top *= 4
-                right *= 4
-                bottom *= 4
-                left *= 4
+                # top *= 4
+                # right *= 4
+                # bottom *= 4
+                # left *= 4
 
                 # Draw a box around the face
-                cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+                cv2.rectangle(small_frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
                 # Draw a label with a name below the face
-                cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+                cv2.rectangle(small_frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
                 font = cv2.FONT_HERSHEY_DUPLEX
-                cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+                cv2.putText(small_frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+                # print(name)
+                saat = time.time()
+                delay.append(saat-sekarang)
+                print("Delay: ", saat-sekarang)
+                print("Avg Delay: ", mean(delay))
 
             # Display the resulting image
-            cv2.imshow('Video', frame)
+            cv2.imshow('Video', small_frame)
 
             # Hit 'q' on the keyboard to quit!
             if cv2.waitKey(1) & 0xFF == ord('q'):
