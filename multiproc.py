@@ -35,6 +35,7 @@ def prev_id(current_id, worker_num):
 def capture(read_frame_list, Global, worker_num):
     # Get a reference to webcam #0 (the default one)
     video_capture = cv2.VideoCapture(0)
+
     # video_capture.set(3, 640)  # Width of the frames in the video stream.
     # video_capture.set(4, 480)  # Height of the frames in the video stream.
     # video_capture.set(5, 30) # Frame rate.
@@ -45,6 +46,7 @@ def capture(read_frame_list, Global, worker_num):
         if Global.buff_num != next_id(Global.read_num, worker_num):
             # Grab a single frame of video
             ret, frame = video_capture.read()
+            frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
             read_frame_list[Global.buff_num] = frame
             Global.buff_num = next_id(Global.buff_num, worker_num)
         else:
@@ -149,7 +151,7 @@ if __name__ == '__main__':
     # obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 
     # Load a second sample picture and learn how to recognize it.
-    biden_image = face_recognition.load_image_file("Belajar/519101_biden.png")
+    biden_image = face_recognition.load_image_file("Sudah_Belajar/519101_biden/519101_biden.png")
     biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
 
     # Create arrays of known face encodings and their names
